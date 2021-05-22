@@ -1,0 +1,4 @@
+build-docker:
+    stage: build
+    script:
+    - echo "Hello World"
