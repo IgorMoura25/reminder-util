@@ -43,5 +43,19 @@ namespace Util.Data.DbConnectors
                 return procedureResult;
             }
         }
+
+        public T ExecuteGetProcedure<T>(string procedureName, DataRequestModel procedureParameter = null)
+        {
+            using (var connection = OpenNewConnection())
+            {
+                var procedureResult = connection.QuerySingleOrDefault<T>(
+                    procedureName,
+                    param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    commandTimeout: COMMAND_TIMEOUT);
+
+                return procedureResult;
+            }
+        }
     }
 }
