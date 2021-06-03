@@ -1,5 +1,7 @@
 ﻿using Dapper;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using Util.Models;
 
 namespace Util.Data.DbConnectors
@@ -49,6 +51,34 @@ namespace Util.Data.DbConnectors
             using (var connection = OpenNewConnection())
             {
                 var procedureResult = connection.QuerySingleOrDefault<T>(
+                    procedureName,
+                    param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    commandTimeout: COMMAND_TIMEOUT);
+
+                return procedureResult;
+            }
+        }
+
+        public List<T> ExecuteListProcedure<T>(string procedureName, DataRequestModel procedureParameter = null)
+        {
+            using (var connection = OpenNewConnection())
+            {
+                var procedureResult = connection.Query<T>(
+                    procedureName,
+                    param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    commandTimeout: COMMAND_TIMEOUT);
+
+                return procedureResult?.ToList();
+            }
+        }
+
+        public long ExecuteDeleteProcedure(string procedureName, DataRequestModel procedureParameter = null)
+        {
+            using (var connection = OpenNewConnection())
+            {
+                var procedureResult = connection.Execute(
                     procedureName,
                     param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
                     commandType: System.Data.CommandType.StoredProcedure,
