@@ -11,3 +11,5 @@ build-docker:
     stage: build
     script:
     - docker build -t reminder-util ./Util
+    - docker tag reminder-util igormoura2501/reminder-util:latest
+    - docker push igormoura2501/reminder-util:latest
