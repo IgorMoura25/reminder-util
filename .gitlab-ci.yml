@@ -5,8 +5,9 @@ services:
 
 before_script:
 - docker info
+- docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
 build-docker:
     stage: build
     script:
-    - docker run hello-world
+    - docker build -t reminder-util .
