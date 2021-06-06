@@ -10,4 +10,4 @@ before_script:
 build-docker:
     stage: build
     script:
-    - docker build -t reminder-util .
+    - docker build -t reminder-util ./Util
