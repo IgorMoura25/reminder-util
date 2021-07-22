@@ -32,6 +32,7 @@ build-project:
 test-project:
     image: igormoura2501/reminder-util:latest
     services:
+    - docker:dind
     - name: microsoft/mssql-server-linux
       alias: localhost
     variables:
