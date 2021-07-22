@@ -12,7 +12,7 @@ build-docker:
     before_script:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    
+
     stage: pre-build
     script:
     - docker build -t reminder-util ./Util
@@ -20,8 +20,11 @@ build-docker:
     - docker push igormoura2501/reminder-util:latest
 
 build-project:
+    services:
+    - docker:dind
+    - mcr.microsoft.com/mssql/server:2019-latest
     stage: build
     dependencies:
     - build-docker
     script:
-    - echo "success"
+    - dotnet build
