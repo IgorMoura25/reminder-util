@@ -33,11 +33,8 @@ test-project:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    - name: microsoft/mssql-server-linux
+    - name: mcr.microsoft.com/mssql/server:2019-latest
       alias: localhost
-    before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     variables:
         ACCEPT_EULA: Y
     stage: test
