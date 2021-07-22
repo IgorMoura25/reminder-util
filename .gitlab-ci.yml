@@ -31,8 +31,17 @@ build-project:
 
 test-project:
     image: igormoura2501/reminder-util:latest
+    services:
+    - name: microsoft/mssql-server-linux
+      alias: localhost
+    variables:
+        ACCEPT_EULA: Y
     stage: test
     dependencies:
     - build-project
     script:
-    - dotnet test
+    - echo "conectando-se ao banco"
+    - sqlcmd -E
+    - select 1
+    - exit
+    - echo "conexão com banco finalizada"
