@@ -35,6 +35,9 @@ test-project:
     - docker:dind
     - name: microsoft/mssql-server-linux
       alias: localhost
+    before_script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     variables:
         ACCEPT_EULA: Y
     stage: test
