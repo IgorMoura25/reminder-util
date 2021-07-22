@@ -41,8 +41,4 @@ test-project:
     dependencies:
     - build-project
     script:
-    - echo "conectando-se ao banco"
-    - sqlcmd -E
-    - select 1
-    - exit
-    - echo "conexão com banco finalizada"
+    - dotnet test
