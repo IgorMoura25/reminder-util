@@ -20,9 +20,9 @@ build-docker:
     - docker push igormoura2501/reminder-util:latest
 
 build-project:
+    image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    - mcr.microsoft.com/mssql/server:2019-latest
     stage: build
     dependencies:
     - build-docker
