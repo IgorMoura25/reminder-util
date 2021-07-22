@@ -28,3 +28,11 @@ build-project:
     - build-docker
     script:
     - dotnet build
+
+test-project:
+    image: igormoura2501/reminder-util:latest
+    stage: test
+    dependencies:
+    - build-project
+    script:
+    - dotnet test
