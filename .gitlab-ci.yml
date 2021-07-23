@@ -37,6 +37,7 @@ test-project:
       alias: localhost
     variables:
         ACCEPT_EULA: Y
+        SA_PASSWORD: myStrongPassword
     stage: test
     dependencies:
     - build-project
