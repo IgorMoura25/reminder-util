@@ -33,11 +33,17 @@ test-project:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    - name: mcr.microsoft.com/mssql/server:2019-latest
-      alias: localhost
+    - mcr.microsoft.com/mssql/server:2019-latest
     variables:
+        MSSQL_HOST: 127.0.0.1
+        MSSQL_PID: Developer
         ACCEPT_EULA: Y
         SA_PASSWORD: myStrongPassword
+        DB_PORT: 1433
+        DB_HOST : 127.0.0.1
+        DB_DATABASE: Reminder_Dev
+        DB_USERNAME: usergitlab
+        DB_PASSWORD: dbpassword
     stage: test
     dependencies:
     - build-project
