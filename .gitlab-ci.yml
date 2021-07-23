@@ -1,7 +1,6 @@
 image: docker:stable
 
 stages:
-- pre-build
 - build
 - test
 - deploy
@@ -13,21 +12,11 @@ build-docker:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
-    stage: pre-build
+    stage: build
     script:
     - docker build -t reminder-util ./Util
     - docker tag reminder-util igormoura2501/reminder-util:latest
     - docker push igormoura2501/reminder-util:latest
-
-build-project:
-    image: igormoura2501/reminder-util:latest
-    services:
-    - docker:dind
-    stage: build
-    dependencies:
-    - build-docker
-    script:
-    - dotnet build
 
 test-project:
     image: igormoura2501/reminder-util:latest
