@@ -36,5 +36,5 @@ deploy-nuget:
     - build-project
     script:
     - dotnet pack
-    - cd Util\bin\Debug
+    - cd /Util/bin/Debug
     - dotnet nuget push Util-Reminder.1.0.0.nupkg --api-key oy2mgg6uz5tvylnpeyrqmwb7xap3zgzu3chapadgvz4ksm --source https://api.nuget.org/v3/index.json
