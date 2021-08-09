@@ -22,7 +22,7 @@ build-project:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    stage: deploy
+    stage: build
     dependencies:
     - build-docker
     script:
@@ -34,7 +34,7 @@ deploy-nuget:
     - docker:dind
     stage: deploy
     dependencies:
-    - build-docker
+    - build-project
     script:
     - ls
     - echo "acabou"
