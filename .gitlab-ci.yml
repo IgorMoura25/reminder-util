@@ -18,6 +18,16 @@ build-docker:
     - docker tag reminder-util igormoura2501/reminder-util:latest
     - docker push igormoura2501/reminder-util:latest
 
+build-project:
+    image: igormoura2501/reminder-util:latest
+    services:
+    - docker:dind
+    stage: deploy
+    dependencies:
+    - build-docker
+    script:
+    - dotnet build
+
 deploy-nuget:
     image: igormoura2501/reminder-util:latest
     services:
@@ -26,5 +36,5 @@ deploy-nuget:
     dependencies:
     - build-docker
     script:
-    - dotnet pack
-    - dotnet nuget push Util-Reminder.1.0.0.nupkg --api-key oy2mgg6uz5tvylnpeyrqmwb7xap3zgzu3chapadgvz4ksm --source https://api.nuget.org/v3/index.json
+    - ls
+    - echo "acabou"
