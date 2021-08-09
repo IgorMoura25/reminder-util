@@ -23,8 +23,6 @@ build-project:
     services:
     - docker:dind
     stage: build
-    dependencies:
-    - build-docker
     script:
     - dotnet build
 
@@ -34,6 +32,7 @@ deploy-nuget:
     - docker:dind
     stage: deploy
     dependencies:
+    - build-docker
     - build-project
     script:
     - ls
