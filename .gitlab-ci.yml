@@ -18,23 +18,12 @@ build-docker:
     - docker tag reminder-util igormoura2501/reminder-util:latest
     - docker push igormoura2501/reminder-util:latest
 
-test-project:
+deploy-nuget:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    - mcr.microsoft.com/mssql/server:2019-latest
-    variables:
-        MSSQL_HOST: 127.0.0.1
-        MSSQL_PID: Developer
-        ACCEPT_EULA: Y
-        SA_PASSWORD: myStrongPassword
-        DB_PORT: 1433
-        DB_HOST : 127.0.0.1
-        DB_DATABASE: Reminder_Dev
-        DB_USERNAME: usergitlab
-        DB_PASSWORD: dbpassword
-    stage: test
+    stage: deploy
     dependencies:
     - build-docker
     script:
-    - dotnet test
+    - dotnet nuget push Util-Reminder.1.0.0.nupkg --api-key oy2mgg6uz5tvylnpeyrqmwb7xap3zgzu3chapadgvz4ksm --source https://api.nuget.org/v3/index.json
