@@ -24,6 +24,7 @@ build-project:
     - docker:dind
     stage: build
     script:
+    - dotnet tool install --global GitVersion.Tool
     - dotnet build
 
 deploy-nuget:
