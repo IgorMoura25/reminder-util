@@ -9,7 +9,7 @@ namespace Util.Data.DbConnectors
     public class SqlServerConnector : IDbConnector
     {
         private const int COMMAND_TIMEOUT = 300;
-        private string ConnectionString { get; set; } = "Server=127.0.0.1:1433; Database=Reminder_Dev; User Id=usergitlab;Password=dbpassword; Trusted_Connection=False";
+        private string ConnectionString { get; set; } = "Server= localhost; Database=Reminder_Dev; Integrated Security=True;";
         private SqlConnection OpenNewConnection()
         {
             var connection = new SqlConnection(ConnectionString);
