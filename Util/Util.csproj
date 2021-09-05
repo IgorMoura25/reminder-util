@@ -2,11 +2,42 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PackageId>Util-Reminder</PackageId>
-    <Version>1.1.0</Version>
+    <PackageId>Reminder-Util</PackageId>
     <Authors>IgorMoura</Authors>
     <Company>IgorMoura</Company>
   </PropertyGroup>
+
+  <Target Name="VersionBumpBeforeBuild" AfterTargets="GetAssemblyVersion">
+    <Exec Command="dotnet-gitversion /showvariable FullSemVer" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Version" />
+    </Exec>
+
+    <Exec Command="dotnet-gitversion /showvariable InformationalVersion" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="InformationalVersion" />
+    </Exec>
+
+    <Exec Command="dotnet-gitversion /showvariable AssemblySemFileVer" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="FileVersion" />
+    </Exec>
+
+    <Exec Command="dotnet-gitversion /showvariable AssemblySemVer" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="AssemblyVersion" />
+    </Exec>
+
+    <Message Text="VersionBumpBeforeBuild: Version $(Version)" />
+  </Target>
+
+  <Target Name="VersionReadBeforePack" BeforeTargets="GenerateNuspec">
+    <Exec Command="dotnet-gitversion /showvariable NuGetVersion" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="PackageVersion" />
+    </Exec>
+
+    <Message Text="GitVersion: PackageVersion $(PackageVersion)" />
+  </Target>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(HOME)/.nuget/NuGet/Local" />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
