@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>Reminder-Util</PackageId>
-    <Version>1.2.0</Version>
+    <Version></Version>
     <Authors>IgorMoura</Authors>
     <Company>IgorMoura</Company>
   </PropertyGroup>
