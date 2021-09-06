@@ -9,7 +9,7 @@
 
   <Target Name="VersionBumpBeforeBuild" AfterTargets="GetAssemblyVersion">
     <Exec Command="dotnet tool install --global GitVersion.Tool" ConsoleToMSBuild="true" EchoOff="true">
-      <Output TaskParameter="ConsoleOutput"/>
+      <Output TaskParameter="ConsoleOutput" PropertyName="Installation" />
     </Exec>
     
     <Exec Command="dotnet-gitversion /showvariable FullSemVer" ConsoleToMSBuild="true" EchoOff="true">
