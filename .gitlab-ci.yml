@@ -40,4 +40,4 @@ deploy-nuget:
     - cd bin
     - cd Debug
     - ls
-    - dotnet nuget push *.nupkg --api-key oy2n3srq4xfrhcmwnohaxvjnx5ftgsxebootad3rj2vv5u --source https://api.nuget.org/v3/index.json
+    - dotnet nuget push Reminder-Util.*.nupkg --api-key oy2jwopjk46urhak2feaqp4azipgw2zezcamhtgdomwzu4 --source https://api.nuget.org/v3/index.json
