@@ -1,4 +1,4 @@
-﻿namespace UtilTest.Models
+﻿namespace IgorMoura.UtilTest.Models
 {
     public class GetUtilTestByIdResponseModel
     {

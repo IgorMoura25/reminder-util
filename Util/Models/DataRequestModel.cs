@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Util.Models
+namespace IgorMoura.Util.Models
 {
     public class DataRequestModel
     {

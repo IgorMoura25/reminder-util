@@ -1,8 +1,8 @@
-using UtilTest.Models;
-using Util.Data.DbConnectors;
 using Xunit;
+using IgorMoura.UtilTest.Models;
+using IgorMoura.Util.Data.DbConnectors;
 
-namespace UtilTest.SqlServerConnectorTest
+namespace IgorMoura.UtilTest.SqlServerConnectorTest
 {
     public class SqlServerConnectorTest
     {

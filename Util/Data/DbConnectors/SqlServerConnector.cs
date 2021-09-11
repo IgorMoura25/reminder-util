@@ -1,10 +1,10 @@
 ﻿using Dapper;
+using IgorMoura.Util.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using Util.Models;
 
-namespace Util.Data.DbConnectors
+namespace IgorMoura.Util.Data.DbConnectors
 {
     public class SqlServerConnector : IDbConnector
     {

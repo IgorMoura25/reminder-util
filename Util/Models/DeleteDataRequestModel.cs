@@ -1,4 +1,4 @@
-﻿namespace Util.Models
+﻿namespace IgorMoura.Util.Models
 {
     public class DeleteDataRequestModel : DataRequestModel
     {

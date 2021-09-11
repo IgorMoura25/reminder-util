@@ -1,6 +1,6 @@
-﻿using Util.Models;
+﻿using IgorMoura.Util.Models;
 
-namespace UtilTest.Models
+namespace IgorMoura.UtilTest.Models
 {
     public class UpdateUtilTestByIdRequestModel : UpdateDataRequestModel
     {

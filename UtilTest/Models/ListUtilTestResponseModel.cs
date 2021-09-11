@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UtilTest.Models
+namespace IgorMoura.UtilTest.Models
 {
     public class ListUtilTestResponseModel
     {

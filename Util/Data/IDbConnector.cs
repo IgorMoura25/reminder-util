@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Util.Models;
+﻿using IgorMoura.Util.Models;
+using System.Collections.Generic;
 
-namespace Util.Data
+namespace IgorMoura.Util.Data
 {
     interface IDbConnector
     {

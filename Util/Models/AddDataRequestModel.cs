@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Util.Models
+namespace IgorMoura.Util.Models
 {
     public class AddDataRequestModel : DataRequestModel
     {
