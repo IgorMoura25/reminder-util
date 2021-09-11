@@ -22,9 +22,8 @@ build-project:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
-    before_script:
-    - git fetch --unshallow --all
-
+    variables:
+        GIT_DEPTH: "1000"
     stage: build
     script:
     - dotnet build
