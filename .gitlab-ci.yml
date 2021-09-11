@@ -23,7 +23,7 @@ build-project:
     services:
     - docker:dind
     variables:
-        GIT_DEPTH: "1000"
+        GIT_DEPTH: "1000000"
     stage: build
     script:
     - dotnet build
@@ -32,6 +32,8 @@ deploy-nuget:
     image: igormoura2501/reminder-util:latest
     services:
     - docker:dind
+    variables:
+        GIT_DEPTH: "1000000"
     stage: deploy
     dependencies:
     - build-docker
