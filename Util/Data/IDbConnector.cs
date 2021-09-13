@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IgorMoura.Util.Data
 {
-    interface IDbConnector
+    public interface IDbConnector
     {
         T ExecuteAddProcedure<T>(string procedureName, DataRequestModel procedureParameter = null);
         long ExecuteUpdateProcedure(string procedureName, DataRequestModel procedureParameter = null);

@@ -5,6 +5,7 @@
     <PackageId>Reminder-Util</PackageId>
     <Authors>IgorMoura</Authors>
     <Company>IgorMoura</Company>
+    <RootNamespace>IgorMoura.Reminder.Util</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
