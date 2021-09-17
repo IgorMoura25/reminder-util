@@ -1,6 +1,7 @@
 using Xunit;
 using IgorMoura.UtilTest.Models;
 using IgorMoura.Util.Data.DbConnectors;
+using System.Threading.Tasks;
 
 namespace IgorMoura.UtilTest.SqlServerConnectorTest
 {
@@ -22,7 +23,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
 
             //Assert
-            Assert.True(utilTestId > 0, "The UtilTestId was not greater than zero");
+            Assert.True(utilTestId > 0, "The UtilTestId was greater than zero");
         }
 
         [Fact]
@@ -34,6 +35,23 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
 
             //Assert
             Assert.True(utilTestId > 0, "The UtilTestId was not greater than zero");
+        }
+
+        [Fact]
+        public async Task ExecuteAddProcedureAsync_ValidAddDataRequestModel_IdGreaterThanZero()
+        {
+            //Arrange
+            var addRequestModel = new AddUtilTestRequestModel()
+            {
+                Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
+                UserId = 1
+            };
+
+            //Act
+            var utilTestId = await _sqlServerConnector.ExecuteAddProcedureAsync<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+
+            //Assert
+            Assert.True(utilTestId > 0, "The UtilTestId was greater than zero");
         }
 
         [Fact]

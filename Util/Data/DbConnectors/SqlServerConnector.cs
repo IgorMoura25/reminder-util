@@ -3,6 +3,7 @@ using IgorMoura.Util.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace IgorMoura.Util.Data.DbConnectors
 {
@@ -26,6 +27,20 @@ namespace IgorMoura.Util.Data.DbConnectors
                     procedureName, 
                     param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
                     commandType: System.Data.CommandType.StoredProcedure, 
+                    commandTimeout: COMMAND_TIMEOUT);
+
+                return procedureResult;
+            }
+        }
+
+        public async Task<T> ExecuteAddProcedureAsync<T>(string procedureName, DataRequestModel procedureParameter = null)
+        {
+            using (var connection = OpenNewConnection())
+            {
+                var procedureResult = await connection.QuerySingleAsync<T>(
+                    procedureName,
+                    param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
+                    commandType: System.Data.CommandType.StoredProcedure,
                     commandTimeout: COMMAND_TIMEOUT);
 
                 return procedureResult;
