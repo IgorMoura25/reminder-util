@@ -6,7 +6,7 @@ namespace IgorMoura.Util.Models
 {
     public class UpdateDataRequestModel : DataRequestModel
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
 
         protected internal UpdateDataRequestModel ShallowCopy()
         {

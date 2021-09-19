@@ -16,7 +16,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act
@@ -38,30 +38,13 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
         }
 
         [Fact]
-        public async Task ExecuteAddProcedureAsync_ValidAddDataRequestModel_IdGreaterThanZero()
-        {
-            //Arrange
-            var addRequestModel = new AddUtilTestRequestModel()
-            {
-                Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
-            };
-
-            //Act
-            var utilTestId = await _sqlServerConnector.ExecuteAddProcedureAsync<long>("SP_RMD_ADD_UtilTest", addRequestModel);
-
-            //Assert
-            Assert.True(utilTestId > 0, "The UtilTestId was greater than zero");
-        }
-
-        [Fact]
         public void ExecuteUpdateProcedure_ValidUpdateDataRequestModel_NumberOfUpdatedRowsGreaterThanZero()
         {
             //Arrange
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
@@ -70,7 +53,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             {
                 UtilTestId = utilTestId,
                 NewDescription = "ExecuteUpdateProcedure_ValidUpdateDataRequestModel_NumberOfUpdatedRowsGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act
@@ -88,7 +71,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             {
                 UtilTestId = -1,
                 NewDescription = "ExecuteUpdateProcedure_InvalidUpdateDataRequestModel_NumberOfUpdatedRowsGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act
@@ -105,7 +88,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
@@ -113,7 +96,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act
@@ -130,7 +113,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
@@ -138,7 +121,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act
@@ -155,7 +138,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
         
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
@@ -163,7 +146,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var deleteRequestModel = new DeleteUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = 1
+                UserId = string.Empty
             };
         
             //Act
@@ -180,7 +163,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = 1
+                UserId = string.Empty
             };
 
             _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
@@ -189,7 +172,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
 
             var listRequestModel = new ListUtilTestRequestModel()
             {
-                UserId = 1
+                UserId = string.Empty
             };
 
             //Act

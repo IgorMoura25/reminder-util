@@ -33,20 +33,6 @@ namespace IgorMoura.Util.Data.DbConnectors
             }
         }
 
-        public async Task<T> ExecuteAddProcedureAsync<T>(string procedureName, DataRequestModel procedureParameter = null)
-        {
-            using (var connection = OpenNewConnection())
-            {
-                var procedureResult = await connection.QuerySingleAsync<T>(
-                    procedureName,
-                    param: procedureParameter != null ? procedureParameter.ShallowCopy() : null,
-                    commandType: System.Data.CommandType.StoredProcedure,
-                    commandTimeout: COMMAND_TIMEOUT);
-
-                return procedureResult;
-            }
-        }
-
         public long ExecuteUpdateProcedure(string procedureName, DataRequestModel procedureParameter = null)
         {
             using (var connection = OpenNewConnection())

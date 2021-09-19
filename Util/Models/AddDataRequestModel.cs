@@ -4,7 +4,7 @@ namespace IgorMoura.Util.Models
 {
     public class AddDataRequestModel : DataRequestModel
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
 
         protected internal AddDataRequestModel ShallowCopy()
         {
