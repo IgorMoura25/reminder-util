@@ -17,3 +17,14 @@ build-docker:
     - docker build -t reminder-util .
     - docker tag reminder-util igormoura2501/reminder-util:latest
     - docker push igormoura2501/reminder-util:latest
+
+build-project:
+    image: igormoura2501/reminder-util:latest
+    services:
+    - docker:dind
+    variables:
+        GIT_DEPTH: "1000000"
+    stage: build
+    script:
+    - ls
+    - dotnet build
