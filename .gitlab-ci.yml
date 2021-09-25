@@ -11,18 +11,37 @@ build-project:
     - docker:dind
     stage: build
     only:
-        - develop
+        - /^feature-.*$/
+        - /^bugfix-.*$/
     script:
     - dotnet build
+    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar
 
-build-project2:
+test-project:
     image: mcr.microsoft.com/dotnet/sdk:3.1
     services:
     - docker:dind
-    stage: build
+    stage: test
     only:
-        - ^feature-.*
-        - ^hotfix-.*
+        - develop
     script:
-    - ls
     - dotnet build
+    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar...
+    #... depois de ter funcionado em feature
+
+#TODO: Voltar a deployar o pacote nuget somente se os testes funcionarem
+#deploy-nuget:
+#    image: mcr.microsoft.com/dotnet/sdk:3.1
+#    services:
+#    - docker:dind
+#    stage: deploy
+#    only:
+#        - develop
+#    dependencies:
+#    - test-project
+#    script:
+#    - dotnet pack
+#    - cd Util
+#    - cd bin
+#    - cd Debug
+#    - dotnet nuget push Reminder-Util.*.nupkg --api-key oy2jwopjk46urhak2feaqp4azipgw2zezcamhtgdomwzu4 --source https://api.nuget.org/v3/index.json
