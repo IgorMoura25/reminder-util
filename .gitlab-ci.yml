@@ -21,7 +21,8 @@ build-project2:
     - docker:dind
     stage: build
     only:
-        - ^(feature?|bugfix?)[/-]
+        - ^feature-.*
+        - ^hotfix-.*
     script:
     - ls
     - dotnet build
