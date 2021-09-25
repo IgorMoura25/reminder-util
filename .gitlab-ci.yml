@@ -9,9 +9,19 @@ build-project:
     image: mcr.microsoft.com/dotnet/sdk:3.1
     services:
     - docker:dind
-    variables:
-        GIT_DEPTH: "1000000"
     stage: build
+    only:
+        - ^dev(elop)?(ment)?$
+    script:
+    - dotnet build
+
+build-project2:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    services:
+    - docker:dind
+    stage: build
+    only:
+        - ^(feature?|bugfix?)[/-]
     script:
     - ls
     - dotnet build
