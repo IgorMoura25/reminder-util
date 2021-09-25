@@ -11,7 +11,7 @@ build-project:
     - docker:dind
     stage: build
     only:
-        - ^dev(elop)?(ment)?$
+        - develop
     script:
     - dotnet build
 
