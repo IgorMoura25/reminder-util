@@ -1,0 +1,6 @@
+﻿CREATE DATABASE TestDB;
+GO
+USE TestDB;
+GO
+CREATE TABLE TestTable (id INT, name VARCHAR(50));
+GO
