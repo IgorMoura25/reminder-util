@@ -29,12 +29,14 @@ test-project:
     - docker:dind
     - name: igormoura2501/reminder-util-scripts:latest
       alias: localhost_mssql
-
     variables:
         FF_NETWORK_PER_BUILD: 1
         ACCEPT_EULA: "Y"
         SA_PASSWORD: "Pass@123"
         MSSQL_PID: "Express"
+        DB_PORT: 1433
+        DB_HOST : localhost_mssql
+        MSSQL_HOST: localhost_mssql
 
     stage: test
     only:
