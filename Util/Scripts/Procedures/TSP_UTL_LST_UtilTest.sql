@@ -1,3 +1,6 @@
+USE Reminder_Dev
+GO
+
 CREATE OR ALTER PROCEDURE [dbo].[TSP_UTL_LST_UtilTest]
 (
 	@UserId VARCHAR(68)
