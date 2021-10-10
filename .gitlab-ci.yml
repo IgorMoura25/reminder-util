@@ -24,16 +24,16 @@ stages:
 
 
 test-project:
-    image: mcr.microsoft.com/dotnet/sdk:3.1
+    image: mcr.microsoft.com/mssql/server:2019-latest #mcr.microsoft.com/dotnet/sdk:3.1
     services:
     - docker:dind
     - name: igormoura2501/reminder-util-scripts:latest
       alias: localhost_mssql
     variables:
         FF_NETWORK_PER_BUILD: 1
-        ACCEPT_EULA: "Y"
-        SA_PASSWORD: "Pass@123"
-        MSSQL_PID: "Express"
+        ACCEPT_EULA: Y
+        SA_PASSWORD: Pass@123
+        MSSQL_PID: Express
         DB_PORT: 1433
         DB_HOST : localhost_mssql
         MSSQL_HOST: localhost_mssql
@@ -46,8 +46,9 @@ test-project:
     #      - deploy-docker-images
 
     script:
-    - sleep 60s
-    - dotnet test
+    - /opt/mssql-tools/bin/sqlcmd -S localhost_mssql -U SA -P "Pass@123"
+        #- sleep 60s
+    #- dotnet test
     #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
 
 #test-project:
