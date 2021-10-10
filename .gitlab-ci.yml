@@ -39,7 +39,7 @@ test-project:
     services:
     - docker:dind
     - name: igormoura2501/reminder-util-scripts:latest
-    alias: localhost_mssql
+      alias: localhost_mssql
     variables:
         FF_NETWORK_PER_BUILD: 1
         ACCEPT_EULA: $ACCEPT_EULA
