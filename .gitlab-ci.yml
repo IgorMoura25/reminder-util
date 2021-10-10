@@ -5,72 +5,72 @@ stages:
 - test
 - deploy
 
+build-project:
+    services:
+    - docker:dind
+
+    stage: build
+    only:
+    - /^feature-.*$/
+    - /^bugfix-.*$/
+
+    script:
+        - dotnet build
+
 deploy-docker-images:
-       services:
-       - docker:dind
-       before_script:
-       - docker info
-       - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    services:
+    - docker:dind
+    before_script:
+        - docker info
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
-       stage: build
-       only:
-           - /^feature-.*$/
-           - /^bugfix-.*$/
+    stage: build
+    only:
+    - develop
 
-       script:
-       - docker build -t reminder-util-scripts ./Util
-       - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
-       - docker push igormoura2501/reminder-util-scripts:latest
+    script:
+        - docker build -t reminder-util-scripts ./Util
+        - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
+        - docker push igormoura2501/reminder-util-scripts:latest
 
 
 test-project:
     image: mcr.microsoft.com/dotnet/sdk:3.1
     services:
-     - docker:dind
-     - name: igormoura2501/reminder-util-scripts:latest
-       alias: localhost_mssql
+    - docker:dind
+    - name: igormoura2501/reminder-util-scripts:latest
+    alias: localhost_mssql
     variables:
-         FF_NETWORK_PER_BUILD: 1
-         ACCEPT_EULA: $ACCEPT_EULA
-         SA_PASSWORD: $LOCAL_SQL_SERVER_PASSWORD
-         MSSQL_PID: $MSSQL_PID
+        FF_NETWORK_PER_BUILD: 1
+        ACCEPT_EULA: $ACCEPT_EULA
+        SA_PASSWORD: $LOCAL_SQL_SERVER_PASSWORD
+        MSSQL_PID: $MSSQL_PID
 
     stage: test
     only:
-        - /^feature-.*$/
-        - /^bugfix-.*$/
+    - develop
+
     dependencies:
-         - deploy-docker-images
+    - deploy-docker-images
 
     script:   
-    - dotnet test
-    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
+        - dotnet test
 
-#test-project:
-#    image: mcr.microsoft.com/dotnet/sdk:3.1
-#    services:
-#    - docker:dind
-#    stage: test
-#    only:
-#        - develop
-#    script:
-#    - dotnet build
-    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar...
-    #... depois de ter funcionado em feature
+deploy-nuget:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    services:
+    - docker:dind
 
-#TODO: Voltar a deployar o pacote nuget somente se os testes funcionarem substituindo hardcode por variáveis
-#deploy-nuget:
-#    image: mcr.microsoft.com/dotnet/sdk:3.1
-#    services:
-#    - docker:dind
-#    stage: deploy
-#    only:
-#        - develop
-#    dependencies:
-#    - test-project
-#    script:
-#    - dotnet pack
-#    - cd Util
-#    - cd bin
-#    - cd Debug
-#    - dotnet nuget push Reminder-Util.*.nupkg --api-key oy2jwopjk46urhak2feaqp4azipgw2zezcamhtgdomwzu4 --source https://api.nuget.org/v3/index.json
+    stage: deploy
+    only:
+    - develop
+
+    dependencies:
+    - test-project
+
+    script:
+        - dotnet pack
+        - cd Util
+        - cd bin
+        - cd Debug
+        - dotnet nuget push Reminder-Util.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
