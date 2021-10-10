@@ -20,7 +20,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             //Assert
             Assert.True(utilTestId > 0, "The UtilTestId was greater than zero");
@@ -31,7 +31,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
         {
             //Arrange
             //Act
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_NullUtilTest", null);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_NullUtilTest", null);
 
             //Assert
             Assert.True(utilTestId > 0, "The UtilTestId was not greater than zero");
@@ -47,7 +47,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
                 UserId = string.Empty
             };
 
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             var updateRequestModel = new UpdateUtilTestByIdRequestModel()
             {
@@ -57,7 +57,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var rowsAffected = _sqlServerConnector.ExecuteUpdateProcedure("SP_RMD_UPD_UtilTestById", updateRequestModel);
+            var rowsAffected = _sqlServerConnector.ExecuteUpdateProcedure("TSP_UTL_UPD_UtilTestById", updateRequestModel);
 
             //Assert
             Assert.True(rowsAffected > 0, "The Rows Affected was not greater than zero");
@@ -75,7 +75,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var rowsAffected = _sqlServerConnector.ExecuteUpdateProcedure("SP_RMD_UPD_UtilTestById", updateRequestModel);
+            var rowsAffected = _sqlServerConnector.ExecuteUpdateProcedure("TSP_UTL_UPD_UtilTestById", updateRequestModel);
 
             //Assert
             Assert.True(rowsAffected == 0, "No rows were affected");
@@ -91,7 +91,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
                 UserId = string.Empty
             };
 
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
@@ -100,7 +100,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var responseModel = _sqlServerConnector.ExecuteGetProcedure<GetUtilTestByIdResponseModel>("SP_RMD_GET_UtilTestById", getRequestModel);
+            var responseModel = _sqlServerConnector.ExecuteGetProcedure<GetUtilTestByIdResponseModel>("TSP_UTL_GET_UtilTestById", getRequestModel);
 
             //Assert
             Assert.True(responseModel != null, "Response model was null");
@@ -116,7 +116,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
                 UserId = string.Empty
             };
 
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
@@ -125,7 +125,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var responseModel = _sqlServerConnector.ExecuteGetProcedure<GetUtilTestByIdResponseModel>("SP_RMD_GET_UtilTestById", getRequestModel);
+            var responseModel = _sqlServerConnector.ExecuteGetProcedure<GetUtilTestByIdResponseModel>("TSP_UTL_GET_UtilTestById", getRequestModel);
 
             //Assert
             Assert.True(responseModel.UtilTestId > 0, "Id was not greater than zero");
@@ -141,7 +141,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
                 UserId = string.Empty
             };
         
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
         
             var deleteRequestModel = new DeleteUtilTestByIdRequestModel()
             {
@@ -150,7 +150,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
         
             //Act
-            var rowsAffected = _sqlServerConnector.ExecuteDeleteProcedure("SP_RMD_DEL_UtilTestById", deleteRequestModel);
+            var rowsAffected = _sqlServerConnector.ExecuteDeleteProcedure("TSP_UTL_DEL_UtilTestById", deleteRequestModel);
         
             //Assert
             Assert.True(rowsAffected > 0, "No rows were affected");
@@ -166,9 +166,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
                 UserId = string.Empty
             };
 
-            _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
-            _sqlServerConnector.ExecuteAddProcedure<long>("SP_RMD_ADD_UtilTest", addRequestModel);
+            _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             var listRequestModel = new ListUtilTestRequestModel()
             {
@@ -176,7 +176,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             };
 
             //Act
-            var listResult = _sqlServerConnector.ExecuteListProcedure<ListUtilTestResponseModel>("SP_RMD_LST_UtilTest", listRequestModel);
+            var listResult = _sqlServerConnector.ExecuteListProcedure<ListUtilTestResponseModel>("TSP_UTL_LST_UtilTest", listRequestModel);
 
             //Assert
             Assert.True(listResult.Count > 0, "Count list was not greater than zero");
