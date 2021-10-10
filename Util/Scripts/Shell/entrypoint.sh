@@ -1,5 +1,5 @@
-﻿
-#!/bin/bash
+﻿#!/bin/bash
+SA_PASSWORD="Pass@123"
 
 echo "RUNNING SQL SERVER IN BACKGROUND"
-./migrate-version.sh & /opt/mssql/bin/sqlservr
+bash ./migrate-version.sh $SA_PASSWORD & /opt/mssql/bin/sqlservr

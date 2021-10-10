@@ -12,4 +12,4 @@ RUN chmod 755 /scripts/*
 RUN chmod +x entrypoint.sh
 RUN chmod +x migrate-version.sh
 
-ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT bash ./entrypoint.sh

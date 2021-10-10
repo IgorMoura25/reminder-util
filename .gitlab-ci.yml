@@ -1,0 +1,66 @@
+image: docker:stable
+
+stages:
+- build
+- test
+- deploy
+
+deploy-docker-images:
+    services:
+    - docker:dind
+    before_script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+    stage: deploy
+    only:
+        - /^feature-.*$/
+        - /^bugfix-.*$/
+    #TODO: Só fazer em develop...
+
+    script:
+    - docker build -t reminder-util-scripts ./Util
+    - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
+    - docker push igormoura2501/reminder-util-scripts:latest
+
+
+build-project:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    services:
+    - docker:dind
+    stage: build
+    only:
+        - /^feature-.*$/
+        - /^bugfix-.*$/
+    script:
+    - dotnet build
+    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
+
+test-project:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    services:
+    - docker:dind
+    stage: test
+    only:
+        - develop
+    script:
+    - dotnet build
+    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar...
+    #... depois de ter funcionado em feature
+
+#TODO: Voltar a deployar o pacote nuget somente se os testes funcionarem substituindo hardcode por variáveis
+#deploy-nuget:
+#    image: mcr.microsoft.com/dotnet/sdk:3.1
+#    services:
+#    - docker:dind
+#    stage: deploy
+#    only:
+#        - develop
+#    dependencies:
+#    - test-project
+#    script:
+#    - dotnet pack
+#    - cd Util
+#    - cd bin
+#    - cd Debug
+#    - dotnet nuget push Reminder-Util.*.nupkg --api-key oy2jwopjk46urhak2feaqp4azipgw2zezcamhtgdomwzu4 --source https://api.nuget.org/v3/index.json

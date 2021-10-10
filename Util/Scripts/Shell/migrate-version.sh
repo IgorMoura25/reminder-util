@@ -1,5 +1,6 @@
-﻿
-#!/bin/sh
+﻿#!/bin/sh
+
+SA_PASSWORD=$1
 
 check_directory_and_run_scripts(){
     cd $1
@@ -14,10 +15,10 @@ check_directory_and_run_scripts(){
             then
                 check_directory_and_run_scripts $file_path # runs recursively, checking subdirectories
             fi
-        elif [[ $file == *.sql ]] #if it is a .sql file
+        elif [[ "$file" == *.sql ]] #if it is a .sql file
         then
             echo "==> RUNNING SCRIPT: $file"
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Pass@123 -d master -i $file
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i $file
         fi
     done
 }
@@ -25,12 +26,9 @@ check_directory_and_run_scripts(){
 echo "SLEEPING 15 SECONDS"
 sleep 15s
 
-if [ ${ENV} = "DEV" ]
-then
-    echo "==> SETTING SCRIPTS TO **DEVELOPMENT** ENVIRONMENT"
-    check_directory_and_run_scripts /scripts/schemas/dev-setup
-    check_directory_and_run_scripts /scripts/procedures
-fi
+echo "==> SETTING SCRIPTS TO **DEVELOPMENT** ENVIRONMENT"
+check_directory_and_run_scripts /scripts/schemas/dev-setup
+check_directory_and_run_scripts /scripts/procedures
 
 if [ $? -eq 0 ]
 then
