@@ -5,23 +5,23 @@ stages:
 - test
 - deploy
 
-deploy-docker-images:
-    services:
-    - docker:dind
-    before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+#deploy-docker-images:
+#    services:
+#    - docker:dind
+#    before_script:
+#    - docker info
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
-    stage: build
-    only:
-        - /^feature-.*$/
-        - /^bugfix-.*$/
+#    stage: build
+#    only:
+#        - /^feature-.*$/
+#        - /^bugfix-.*$/
     #TODO: Só fazer em develop...
 
-    script:
-    - docker build -t reminder-util-scripts ./Util
-    - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
-    - docker push igormoura2501/reminder-util-scripts:latest
+#    script:
+#    - docker build -t reminder-util-scripts ./Util
+#    - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
+#    - docker push igormoura2501/reminder-util-scripts:latest
 
 
 test-project:
