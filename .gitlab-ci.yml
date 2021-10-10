@@ -5,23 +5,23 @@ stages:
 - test
 - deploy
 
-# deploy-docker-images:
-#     services:
-#     - docker:dind
-#     before_script:
-#     - docker info
-#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+ deploy-docker-images:
+     services:
+     - docker:dind
+     before_script:
+     - docker info
+     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
-#     stage: build
-#     only:
-#         - /^feature-.*$/
-#         - /^bugfix-.*$/
-#     #TODO: Só fazer em develop...
+     stage: build
+     only:
+         - /^feature-.*$/
+         - /^bugfix-.*$/
+     #TODO: Só fazer em develop...
 
-#     script:
-#     - docker build -t reminder-util-scripts ./Util
-#     - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
-#     - docker push igormoura2501/reminder-util-scripts:latest
+     script:
+     - docker build -t reminder-util-scripts ./Util
+     - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
+     - docker push igormoura2501/reminder-util-scripts:latest
 
 
 test-project:
@@ -30,7 +30,6 @@ test-project:
     - docker:dind
     - name: igormoura2501/reminder-util-scripts:latest
       alias: localhost_mssql
-      entrypoint: ["ls"]
 
     variables:
         FF_NETWORK_PER_BUILD: 1
@@ -42,8 +41,8 @@ test-project:
     only:
         - /^feature-.*$/
         - /^bugfix-.*$/
-    # dependencies:
-    #     - deploy-docker-images
+     dependencies:
+         - deploy-docker-images
 
     script:
     - dotnet build
