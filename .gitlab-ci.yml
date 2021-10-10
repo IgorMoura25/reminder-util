@@ -30,7 +30,7 @@ test-project:
     - docker:dind
     - name: igormoura2501/reminder-util-scripts:latest
       alias: localhost_mssql
-      entrypoint: ["bash ./entrypoint.sh"]
+      entrypoint: ["/bin/bash ./entrypoint.sh"]
 
     variables:
         FF_NETWORK_PER_BUILD: 1
