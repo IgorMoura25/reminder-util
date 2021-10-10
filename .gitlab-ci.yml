@@ -12,7 +12,7 @@ deploy-docker-images:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
-    stage: deploy
+    stage: build
     only:
         - /^feature-.*$/
         - /^bugfix-.*$/
@@ -24,27 +24,40 @@ deploy-docker-images:
     - docker push igormoura2501/reminder-util-scripts:latest
 
 
-build-project:
-    image: mcr.microsoft.com/dotnet/sdk:3.1
-    services:
-    - docker:dind
-    stage: build
-    only:
-        - /^feature-.*$/
-        - /^bugfix-.*$/
-    script:
-    - dotnet build
-    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
-
 test-project:
     image: mcr.microsoft.com/dotnet/sdk:3.1
     services:
     - docker:dind
+    - name: igormoura2501/reminder-util-scripts:latest
+      alias: localhost_mssql
+      entrypoint: ["bash ./entrypoint.sh"]
+
+    variables:
+        FF_NETWORK_PER_BUILD: 1
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "Pass@123"
+        MSSQL_PID: "Express"
+
     stage: test
     only:
-        - develop
+        - /^feature-.*$/
+        - /^bugfix-.*$/
+    dependencies:
+        - deploy-docker-images
+
     script:
     - dotnet build
+    #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
+
+#test-project:
+#    image: mcr.microsoft.com/dotnet/sdk:3.1
+#    services:
+#    - docker:dind
+#    stage: test
+#    only:
+#        - develop
+#    script:
+#    - dotnet build
     #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar...
     #... depois de ter funcionado em feature
 
