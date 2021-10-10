@@ -34,9 +34,6 @@ test-project:
          ACCEPT_EULA: Y
          SA_PASSWORD: Pass@123
          MSSQL_PID: Express
-         DB_PORT: 1433
-         DB_HOST : localhost_mssql
-         MSSQL_HOST: localhost_mssql
 
     stage: test
     only:
@@ -46,7 +43,7 @@ test-project:
          - deploy-docker-images
 
     script:   
-    - sleep 30s
+    - sleep 15s
     - dotnet test
     #TODO: Substituir "dotnet build" por "dotnet test" e fazer funcionar DEPOIS arrancar daqui e deixar somente em develop
 
