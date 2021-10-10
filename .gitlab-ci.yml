@@ -5,7 +5,7 @@ stages:
 - test
 - deploy
 
- deploy-docker-images:
+deploy-docker-images:
      services:
      - docker:dind
      before_script:
@@ -16,8 +16,7 @@ stages:
      only:
          - /^feature-.*$/
          - /^bugfix-.*$/
-     #TODO: Só fazer em develop...
-
+#TODO: teste
      script:
      - docker build -t reminder-util-scripts ./Util
      - docker tag reminder-util-scripts igormoura2501/reminder-util-scripts:latest
@@ -41,7 +40,7 @@ test-project:
     only:
         - /^feature-.*$/
         - /^bugfix-.*$/
-     dependencies:
+    dependencies:
          - deploy-docker-images
 
     script:
