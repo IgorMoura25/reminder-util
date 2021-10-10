@@ -12,3 +12,4 @@ BEGIN
 		UtilTests.UtilTestId = @UtilTestId
 
 END
+GO

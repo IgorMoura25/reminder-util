@@ -11,3 +11,4 @@ BEGIN
 	ORDER BY
 		UtilTests.UtilTestId
 END
+GO
