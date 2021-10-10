@@ -13,3 +13,5 @@ RUN chmod +x entrypoint.sh
 RUN chmod +x migrate-version.sh
 
 EXPOSE 1433
+
+ENTRYPOINT bash ./entrypoint.sh
