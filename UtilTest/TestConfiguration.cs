@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace IgorMoura.Reminder.UtilTest
 {
@@ -8,18 +9,29 @@ namespace IgorMoura.Reminder.UtilTest
         {
             get
             {
-                var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
+                var pipelineConfig = new ConfigurationBuilder()
+                                            .AddJsonFile("pipelinesettings.json")
+                                            .Build();
 
-                var defaultConnection = config["Data:DefaultConnection:ConnectionString"];
-
-                if (string.IsNullOrEmpty(defaultConnection) || string.IsNullOrWhiteSpace(defaultConnection))
+                try
                 {
-                    defaultConnection = config["Data:TestPipelineConnection:ConnectionString"];
-                }
+                    var config = new ConfigurationBuilder()
+                                    .AddJsonFile("appsettings.json")
+                                    .Build();
 
-                return defaultConnection;
+                    var defaultConnection = config["Data:DefaultConnection:ConnectionString"];
+
+                    if (string.IsNullOrEmpty(defaultConnection) || string.IsNullOrWhiteSpace(defaultConnection))
+                    {
+                        defaultConnection = pipelineConfig["Data:TestPipelineConnection:ConnectionString"];
+                    }
+
+                    return defaultConnection;
+                }
+                catch (FileNotFoundException)
+                {
+                    return pipelineConfig["Data:TestPipelineConnection:ConnectionString"];
+                }
             }
         }
     }
