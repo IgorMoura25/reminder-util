@@ -1,13 +1,13 @@
 using Xunit;
 using IgorMoura.UtilTest.Models;
 using IgorMoura.Util.Data.DbConnectors;
-using System.Threading.Tasks;
+using IgorMoura.Reminder.UtilTest;
 
 namespace IgorMoura.UtilTest.SqlServerConnectorTest
 {
     public class SqlServerConnectorTest
     {
-        public SqlServerConnector _sqlServerConnector { get; set; } = new SqlServerConnector();
+        public SqlServerConnector _sqlServerConnector { get; set; } = new SqlServerConnector(TestConfiguration.ConnectionString);
 
         [Fact]
         public void ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()

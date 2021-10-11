@@ -1,20 +1,24 @@
-﻿using Dapper;
-using IgorMoura.Util.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
+using IgorMoura.Util.Models;
 
 namespace IgorMoura.Util.Data.DbConnectors
 {
     public class SqlServerConnector : IDbConnector
     {
         private const int COMMAND_TIMEOUT = 300;
-        private string ConnectionString { get; set; } = "Server=localhost_mssql,1433; Database=Reminder_Dev; User Id=sa; Password=Pass@123;";
+        private string _connectionString { get; set; }
+
+        public SqlServerConnector(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
         private SqlConnection OpenNewConnection()
         {
-            var connection = new SqlConnection(ConnectionString);
+            var connection = new SqlConnection(_connectionString);
             connection.Open();
 
             return connection;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IgorMoura.Util.Models
+﻿namespace IgorMoura.Util.Models
 {
     public class DataRequestModel
     {

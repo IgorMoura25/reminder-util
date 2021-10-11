@@ -1,5 +1,5 @@
-﻿using IgorMoura.Util.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using IgorMoura.Util.Models;
 
 namespace IgorMoura.Util.Data
 {

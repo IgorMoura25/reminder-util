@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IgorMoura.UtilTest.Models
+﻿namespace IgorMoura.UtilTest.Models
 {
     public class ListUtilTestResponseModel
     {
