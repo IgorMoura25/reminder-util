@@ -4,7 +4,7 @@
     {
         public string UserId { get; set; }
 
-        protected internal GetDataRequestModel ShallowCopy()
+        protected internal new GetDataRequestModel ShallowCopy()
         {
             return (GetDataRequestModel)MemberwiseClone();
         }
