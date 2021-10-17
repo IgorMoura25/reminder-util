@@ -2,6 +2,11 @@ USE Reminder_Dev
 GO
 
 CREATE OR ALTER PROCEDURE [dbo].[TSP_UTL_ADD_NullUtilTest]
+(
+	@IsActive BIT,
+	@CreatedAt DATETIME,
+	@UserId BIGINT
+)
 AS
 BEGIN
 	INSERT INTO

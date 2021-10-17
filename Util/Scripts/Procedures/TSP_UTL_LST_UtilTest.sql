@@ -3,7 +3,9 @@ GO
 
 CREATE OR ALTER PROCEDURE [dbo].[TSP_UTL_LST_UtilTest]
 (
-	@UserId VARCHAR(68)
+	@Offset BIGINT,
+	@Count BIGINT,
+	@UserId BIGINT
 )
 AS
 BEGIN
@@ -13,5 +15,9 @@ BEGIN
 		UtilTests
 	ORDER BY
 		UtilTests.UtilTestId
+	OFFSET 
+		@Offset ROWS
+	FETCH NEXT 
+		@Count ROWS ONLY;
 END
 GO
