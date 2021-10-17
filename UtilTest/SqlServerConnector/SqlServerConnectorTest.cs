@@ -1,3 +1,5 @@
+using System;
+using System.Data.SqlClient;
 using Xunit;
 using IgorMoura.UtilTest.Models;
 using IgorMoura.Util.Data.DbConnectors;
@@ -16,25 +18,25 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
 
             //Act
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
 
             //Assert
-            Assert.True(utilTestId > 0, "The UtilTestId was greater than zero");
+            Assert.True(utilTestId > 0, "The UtilTestId was not greater than zero");
         }
 
         [Fact]
-        public void ExecuteAddProcedure_NullAddDataRequestModel_IdGreaterThanZero()
+        public void ExecuteAddProcedure_NullAddDataRequestModel_ThrowsSqlException()
         {
             //Arrange
             //Act
-            var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_NullUtilTest", null);
-
             //Assert
-            Assert.True(utilTestId > 0, "The UtilTestId was not greater than zero");
+            Assert.Throws<SqlException>(() => _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_NullUtilTest", null));
         }
 
         [Fact]
@@ -44,7 +46,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
@@ -53,7 +57,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             {
                 UtilTestId = utilTestId,
                 NewDescription = "ExecuteUpdateProcedure_ValidUpdateDataRequestModel_NumberOfUpdatedRowsGreaterThanZero()",
-                UserId = string.Empty
+                UserId = 1
             };
 
             //Act
@@ -71,14 +75,14 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             {
                 UtilTestId = -1,
                 NewDescription = "ExecuteUpdateProcedure_InvalidUpdateDataRequestModel_NumberOfUpdatedRowsGreaterThanZero()",
-                UserId = string.Empty
+                UserId = 1
             };
 
             //Act
             var rowsAffected = _sqlServerConnector.ExecuteUpdateProcedure("TSP_UTL_UPD_UtilTestById", updateRequestModel);
 
             //Assert
-            Assert.True(rowsAffected == 0, "No rows were affected");
+            Assert.True(rowsAffected == 0, "The Rows Affected was greater than zero");
         }
 
         [Fact]
@@ -88,7 +92,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
@@ -96,7 +102,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = string.Empty
+                UserId = 1
             };
 
             //Act
@@ -113,7 +119,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
 
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
@@ -121,7 +129,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var getRequestModel = new GetUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = string.Empty
+                UserId = 1
             };
 
             //Act
@@ -138,7 +146,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
         
             var utilTestId = _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
@@ -146,7 +156,7 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var deleteRequestModel = new DeleteUtilTestByIdRequestModel()
             {
                 UtilTestId = utilTestId,
-                UserId = string.Empty
+                UserId = 1
             };
         
             //Act
@@ -163,7 +173,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
             var addRequestModel = new AddUtilTestRequestModel()
             {
                 Description = "ExecuteAddProcedure_ValidAddDataRequestModel_IdGreaterThanZero()",
-                UserId = string.Empty
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                UserId = 1
             };
 
             _sqlServerConnector.ExecuteAddProcedure<long>("TSP_UTL_ADD_UtilTest", addRequestModel);
@@ -172,7 +184,9 @@ namespace IgorMoura.UtilTest.SqlServerConnectorTest
 
             var listRequestModel = new ListUtilTestRequestModel()
             {
-                UserId = string.Empty
+                Count = 1000,
+                Offset = 0,
+                UserId = 1
             };
 
             //Act

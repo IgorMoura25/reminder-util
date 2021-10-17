@@ -4,7 +4,7 @@ GO
 CREATE OR ALTER PROCEDURE [dbo].[TSP_UTL_GET_UtilTestById]
 (
 	@UtilTestId BIGINT,
-	@UserId VARCHAR(68)
+	@UserId BIGINT
 )
 AS
 BEGIN

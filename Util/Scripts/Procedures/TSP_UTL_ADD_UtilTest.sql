@@ -4,7 +4,9 @@ GO
 CREATE OR ALTER PROCEDURE [dbo].[TSP_UTL_ADD_UtilTest]
 (
 	@Description VARCHAR(100),
-	@UserId VARCHAR(68)
+	@IsActive BIT,
+	@CreatedAt DATETIME,
+	@UserId BIGINT
 )
 AS
 BEGIN

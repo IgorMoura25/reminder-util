@@ -2,7 +2,9 @@
 {
     public class ListDataRequestModel : DataRequestModel
     {
-        public string UserId { get; set; }
+        public long Offset { get; set; }
+        public long Count { get; set; }
+        public long UserId { get; set; }
 
         protected internal new ListDataRequestModel ShallowCopy()
         {
